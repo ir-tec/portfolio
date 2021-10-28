@@ -1,0 +1,11 @@
+@font-face {
+  font-family: Tisa;
+  src: url("../font/Poppins-Medium.ttf");
+}
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  scroll-behavior: smooth;
+}
