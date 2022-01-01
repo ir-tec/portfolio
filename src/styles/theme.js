@@ -1,15 +1,28 @@
 import { createTheme } from "@material-ui/core";
 
 export const theme = createTheme({
+  direction: "rtl",
   palette: {
     primary: {
-      main: "#c95431",
+      main: "#ffc400",
     },
     secondary: {
-      main: "#ffff",
+      main: "#000",
     },
   },
   typography: {
-    fontFamily: "Tisa",
+    fontFamily: "vazir",
+  },
+  overrides: {
+    MuiTab: {
+      root: {
+        textTransform: "capitalize",
+      },
+    },
+    MuiButton: {
+      label: {
+        textTransform: "capitalize",
+      },
+    },
   },
 });

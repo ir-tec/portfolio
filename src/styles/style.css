@@ -1,11 +1,35 @@
 @font-face {
-  font-family: Tisa;
+  font-family: Poppins;
   src: url("../font/Poppins-Medium.ttf");
 }
-html {
-  scroll-behavior: smooth;
+@font-face {
+  font-family: dana;
+  src: url("../font/Dana-Regular.ttf");
+}
+@font-face {
+  font-family: vazir;
+  src: url("../font/Vazir-Regular.ttf");
 }
 
 * {
   scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  height: 12px;
+  width: 0;
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffc400;
+  -webkit-border-radius: 1ex;
+  border-radius: 1ex;
+  -webkit-box-shadow: 0px 1px 2px #fff;
+  box-shadow: 0px 1px 2px #fff;
+}
+
+::-webkit-scrollbar-corner {
+  background: #fff;
 }

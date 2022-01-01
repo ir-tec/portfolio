@@ -1,12 +1,12 @@
-import { Grid, Button, IconButton } from "@material-ui/core";
+import { Grid, Button, IconButton, Hidden } from "@material-ui/core";
 
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { Menu } from "@material-ui/icons";
+import { Home } from "@material-ui/icons";
 import Contract from "../pages/Contract";
-
-const NavBar = ({ width, setSideStatus, scrollToBottom }) => {
+import { Scrollchor } from "react-scrollchor";
+const NavBar = ({ width, setSideStatus }) => {
   const history = useHistory();
 
   return (
@@ -16,75 +16,73 @@ const NavBar = ({ width, setSideStatus, scrollToBottom }) => {
         xs={12}
         container
         alignItems="center"
-        justifyContent="space-around"
+        justifyContent="center"
         style={{
           height: 100,
-
           position: "absolute",
         }}
       >
-        <Grid item xs={1} style={{ color: "white" }}>
-          <Contract />
+        <Grid
+          item
+          xs={11}
+          direction="row-reverse"
+          justifyContent="space-between"
+          alignItems="center"
+          container
+        >
+          <Grid item style={{ color: "white" }}>
+            <Contract />
+          </Grid>
+          <Hidden mdDown>
+            <Grid
+              item
+              xs={5}
+              container
+              justifyContent="flex-start"
+              style={{ color: "white" }}
+            >
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={() => {
+                  history.push("#home");
+                }}
+              >
+                صفحه اصلی
+              </Button>
+              {routes.map((item, i) => {
+                return (
+                  <Button key={i} variant="text" color="secondary">
+                    <Scrollchor
+                      to={item.route}
+                      onClick={() =>
+                        new Promise((res, rej) => {
+                          history.push("/");
+                          res();
+                          rej();
+                        }).then(() => {
+                          history.push(`#${item.route}`);
+                        })
+                      }
+                      style={{ textDecoration: "none", color: "inherit" }}
+                      animate={{}}
+                    >
+                      {item.title}
+                    </Scrollchor>
+                  </Button>
+                );
+              })}
+            </Grid>
+          </Hidden>
+
+          <Hidden mdUp>
+            <Grid item>
+              <IconButton onClick={() => setSideStatus(true)}>
+                <Home color="secondary" fontSize="large" />
+              </IconButton>
+            </Grid>
+          </Hidden>
         </Grid>
-        {width > 960 ? (
-          <Grid
-            item
-            xs={5}
-            container
-            justifyContent="flex-end"
-            style={{ color: "white" }}
-          >
-            <Button
-              variant="text"
-              color="inherit"
-              onClick={() => {
-                let p = new Promise((res, rej) => {
-                  history.push("/features");
-                  res();
-                  rej();
-                });
-                p.then(() => {
-                  scrollToBottom();
-                });
-              }}
-            >
-              Features
-            </Button>
-            <Button
-              variant="text"
-              color="inherit"
-              onClick={() => {
-                history.push("/about-me");
-              }}
-            >
-              About Me
-            </Button>
-            <Button
-              variant="text"
-              color="inherit"
-              onClick={() => {
-                history.push("/contact-info");
-              }}
-            >
-              Contant Info
-            </Button>
-            <Button
-              variant="outlined"
-              color="inherit"
-              onClick={() => {
-                history.push("/");
-              }}
-            >
-              Home
-            </Button>
-          </Grid>
-        ) : (
-          <Grid item>
-            <IconButton onClick={() => setSideStatus(true)}>
-              <Menu style={{ color: "white" }} />
-            </IconButton>
-          </Grid>
-        )}
       </Grid>
     </>
   );
@@ -95,3 +93,9 @@ const mapStateToProps = (props) => {
 };
 
 export default connect(mapStateToProps)(NavBar);
+
+const routes = [
+  { title: "آموزش", route: "courses" },
+  { title: "همکاری", route: "cooperation" },
+  { title: "تماس با ما", route: "contant" },
+];

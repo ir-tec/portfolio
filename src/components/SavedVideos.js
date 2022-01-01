@@ -10,8 +10,7 @@ import { connect } from "react-redux";
 
 const SavedVideos = ({ width }) => {
   const theme = useTheme();
-  console.log(theme.breakpoints.values.md);
-  console.log(width);
+
   const slideRef = React.createRef();
   const goToNext = () => {
     slideRef.current.slickNext();
